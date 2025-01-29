@@ -4,31 +4,50 @@ import java.util.Scanner;
 class Artist {
 
     String name;
-    static String typeOfField = "Artist";
+    static String typeOfField = "Artist";//static variable
     float experience;
     int noOfArt;
     String art[];
     int rates;
 
-    public Artist() {
+    public Artist() {//default constructor
         experience = 0;
         rates = 0;
     }
 
-    public Artist(int a, String s, int b) {
+    public Artist(int a, String s, int b) //parametrised constructor
+    {
         experience = a;
         name = s;
         rates -= b;
     }
 
-    public void input() {
+    public void input() //memeber function for input
+    {
+   
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the name of artist :");
         name = sc.next();
         System.out.print("Enter the experience of artist in year:");
         experience = sc.nextInt();
+        if(experience<0)
+        {do{
+        
+        System.out.print("enter the experience greater than 0\n");
+        System.out.print("Enter the experience of artist in year:");
+        experience = sc.nextInt();
+        }while(experience<0);
+        }
         System.out.print("how many art field are you working with :");
         noOfArt = sc.nextInt();
+        if(noOfArt<0)
+        {do{
+        
+        System.out.print("enter the art field greater than 0\n");
+        System.out.print("how many art field are you working with :");
+        noOfArt = sc.nextInt();
+        }while(noOfArt<0);
+        }
         art = new String[noOfArt];
 
         System.out.print("Enter the name of your  Art fields :");
@@ -38,15 +57,25 @@ class Artist {
 
         System.out.print("Enter your average rates  in rupees:");
         rates = sc.nextInt();
+        if(rates<0)
+        {do{
+        
+        System.out.print("enter the rate greater than 0\n");
+        System.out.print("Enter your average rates  in rupees:");
+        rates = sc.nextInt();
+        }while(rates<0);
+        }
         System.out.println();
     }
+   
 
-    static public void display() {
+    static public void display() {//static function for display
         System.out.println("Artfield :" + typeOfField);
 
     }
 
-    public void display1() {
+    public void display1() //member function for display
+    {
         System.out.println("name :" + name);
         System.out.println("Experience :" + experience + " years");
         System.out.println("Rates :" + rates + "ruppes");
@@ -62,16 +91,16 @@ class Artist {
 class first {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to the Tushar's Art World");
-        int ch;
+        System.out.println("\nWelcome to the Tushar's Art World");
+        int ch,check=0;
         int n=0;
-        Scanner sc = new Scanner(System.in);
-        Artist T[] = new Artist[10];
+        Scanner sc = new Scanner(System.in);//object of class Scanner
+        Artist T[] = new Artist[10];//array of object
 
         do {
 
             System.out.println("Select your choice");
-            System.out.println("1.Complete the artist profile\n2.display the list of Artist\n3.exit");
+            System.out.println("1.Complete the artist profile\n2.display the list of Artist\n3.recommondation\n4.exit.");
             ch = sc.nextInt();
 
             switch (ch) {
@@ -83,8 +112,7 @@ class first {
                     { System.out.println("enter information of artist :"+(i+1));
                         T[i]=new Artist();
                         T[i].input();
-                        T[i]=new Artist();
-                        T[i].input();
+                        
                     }
                 
                     break;
@@ -98,8 +126,26 @@ class first {
                   }
 
                   break;
+                case 3:
+                  System.out.println("the best artist for you are:");
+                for(int i=0;i<n;i++)
+                {
+              
+                if(T[i].noOfArt>3&&T[i].experience>4)
+                {
+                Artist.display();
+                T[i].display1();
+                check++;
+                }
+               if(check==0)
+               {
+               System.out.println("all are best");
+               
+               }
+            }
+            break;
             }
 
-        } while (ch != 3);
+        } while (ch != 4);
     }
-}
+    }
