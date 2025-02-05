@@ -1,0 +1,113 @@
+import java.util.Scanner;
+class Artist{
+    String name;
+    int age;
+    int experience;
+    String location;
+    public Artist(String nameA,int ageA,int experienceA,String locationA){
+        name=nameA;
+        age=ageA;
+        experience=experienceA;
+        location=locationA;
+    }
+    public Artist()
+    {   
+        age=0;
+        experience=0;
+    }
+    void input()
+    {
+        Scanner ip=new Scanner(System.in);
+        System.out.print("Enete the name of Artist :");
+        name=ip.next();
+        System.out.print("Enter age");
+        age=ip.nextInt();
+        System.out.print("Enter the experience");
+        experience=ip.nextInt();
+    }
+    final void printmainInfo()
+    {
+     System.out.println("Artist Name :"+name);
+     System.out.println("Age       :"+age);
+     System.out.println("Experience:"+experience);
+     System.out.println("Location :"+location);
+    }
+
+}
+class Mehandi extends Artist{
+    int noOfMehandi;
+    String[] nameOfPattern;
+    int rates;
+    Mehandi(int cost,int no,String[] pattern)
+    {
+        noOfMehandi=no;
+        nameOfPattern=pattern;
+        rates=cost;
+    }
+void printInfo()
+{
+    System.out.println("No of Mehandi pattern done"+noOfMehandi);
+    System.out.println("Name of pattern are");
+    for(int i=0;i<noOfMehandi;i++)
+    {
+        System.out.println(i+1+"."+nameOfPattern[i]);
+    }
+    System.out.println("Rates :"+rates);
+
+}
+}
+class Rangoli extends Artist{
+    int noOfRangoli;
+    String[] nameOfRPattern;
+    int ratesR;
+Rangoli(int cost,int no,String[] pattern)
+    {
+        noOfRangoli=no;
+        nameOfRPattern=pattern;
+        ratesR=cost;
+    }
+void printInfo()
+{
+    System.out.println("No of Mehandi pattern done"+noOfRangoli);
+    System.out.println("Name of pattern are");
+    for(int i=0;i<noOfRangoli;i++)
+    {
+        System.out.println(i+1+"."+nameOfRPattern[i]);
+    }
+    System.out.println("Rates :"+ratesR );
+
+}
+}
+class inheripoly{
+
+
+public static void main(String[] args)
+{ 
+    Artist head=new Artist();
+    Scanner ip=new Scanner(System.in);
+    System.out.println("Enter the name of artist");
+    head.name=ip.nextLine();
+    System.out.println("Enter the contact of artist");
+    head.experience=ip.nextInt();
+    System.out.println("Enter the address of artist");
+    head.location=ip.nextLine();
+    System.out.println("Enter the no of mehandi pattern done");
+    int no=ip.nextInt();
+    String[] pattern=new String[no];
+    System.out.println("Enter the name of mehandi pattern");
+    for(int i=0;i<no;i++)
+    {
+        pattern[i]=ip.next();
+    }
+    System.out.println("Enter the cost of mehandi pattern");
+    int cost=ip.nextInt();
+    Mehandi mehandi=new Mehandi(cost,no,pattern);
+    mehandi.printInfo();
+    head.printmainInfo();
+    // Rangoli rangoli=new Rangoli();
+    // Mehandi mehandi=new Mehandi();
+
+    
+    
+
+}}
