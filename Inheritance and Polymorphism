@@ -1,190 +1,198 @@
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-class Artist{
+
+class Artist {
     String name;
     int age;
     int experience;
     String location;
-    public Artist(String nameA,int ageA,int experienceA,String locationA){
-        name=nameA;
-        age=ageA;
-        experience=experienceA;
-        location=locationA;
-    }
-    public Artist()
-    {   
-        age=0;
-        experience=0;
-    }
-    void input()
-    {
-        Scanner ip=new Scanner(System.in);
-        System.out.print("Enete the name of Artist :");
-        name=ip.next();
-        System.out.print("Enter age");
-        age=ip.nextInt();
-        System.out.print("Enter the experience");
-        experience=ip.nextInt();
-    }
-    final void printmainInfo()
-    {
-     System.out.println("Artist Name :"+name);
-     System.out.println("Age       :"+age);
-     System.out.println("Experience:"+experience);
-     System.out.println("Location :"+location);
+
+    public Artist(String nameA, int ageA, int experienceA, String locationA) {
+        name = nameA;
+        age = ageA;
+        experience = experienceA;
+        location = locationA;
     }
 
+    public Artist() {
+        age = 0;
+        experience = 0;
+    }
+
+    final void printmainInfo() {
+        System.out.println("\n### Artist Information ###");
+        System.out.println("Name       : " + name);
+        System.out.println("Age        : " + age);
+        System.out.println("Experience : " + experience + " years");
+        System.out.println("Location   : " + location);
+    }
 }
-class Mehandi extends Artist{
+
+class Mehandi extends Artist {
     int noOfMehandi;
     String[] nameOfPattern;
     int rates;
-    Mehandi(int cost,int no,String[] pattern)
-    {
-        noOfMehandi=no;
-        nameOfPattern=pattern;
-        rates=cost;
-    }
-void printInfo()
-{
-    System.out.println("No of Mehandi pattern done"+noOfMehandi);
-    System.out.println("Name of pattern are");
-    for(int i=0;i<noOfMehandi;i++)
-    {
-        System.out.println(i+1+"."+nameOfPattern[i]);
-    }
-    System.out.println("Rates :"+rates);
+    int experience;
 
+    Mehandi(int cost, int no, String[] pattern, int exp) {
+        this.noOfMehandi = no;
+        this.nameOfPattern = pattern;
+        this.rates = cost;
+        this.experience = exp;
+    }
+
+    Mehandi() {
+        this.noOfMehandi = 0;
+        this.rates = 0;
+        this.experience = 0;
+        this.nameOfPattern = new String[0];  
+    }
+
+    void printInfo() {
+        super.printmainInfo();
+        System.out.println("\n### Mehandi Details ###");
+        System.out.println("No of Mehandi patterns: " + noOfMehandi);
+        System.out.println("Patterns:");
+        for (int i = 0; i < noOfMehandi; i++) {
+            System.out.println((i + 1) + ". " + nameOfPattern[i]);
+        }
+        System.out.println("Rates      : " + rates);
+        System.out.println("Experience : " + experience + " years");
+    }
 }
-}
-class Rangoli extends Artist{
-    int noOfRangoli;
-    String[] nameOfRPattern;
+
+class Rangoli extends Artist {
+    protected int noOfRangoli;
+    protected String[] nameOfRPattern;
     int ratesR;
-Rangoli(int cost,int no,String[] pattern)
-    {
-        noOfRangoli=no;
-        nameOfRPattern=pattern;
-        ratesR=cost;
+
+    Rangoli(int cost, int no, String[] pattern) {
+        noOfRangoli = no;
+        nameOfRPattern = pattern;
+        ratesR = cost;
     }
-void printInfo()
-{
-    System.out.println("No of Mehandi pattern done"+noOfRangoli);
-    System.out.println("Name of pattern are");
-    for(int i=0;i<noOfRangoli;i++)
-    {
-        System.out.println(i+1+"."+nameOfRPattern[i]);
+
+    Rangoli() {
+        super();
+        this.noOfRangoli = 0;
+        this.ratesR = 0;
+        this.nameOfRPattern = new String[0];
     }
-    System.out.println("Rates :"+ratesR );
 
+    void printInfo() {
+        super.printmainInfo();
+        System.out.println("\n### Rangoli Details ###");
+        System.out.println("No of Rangoli patterns: " + noOfRangoli);
+        System.out.println("Patterns:");
+        for (int i = 0; i < noOfRangoli; i++) {
+            System.out.println((i + 1) + ". " + nameOfRPattern[i]);
+        }
+        System.out.println("Rates      : " + ratesR);
+    }
 }
+
+final class Portraittype extends Rangoli {
+    final String RangoliType = "Portrait";
+    int noOfPortrait;
+    String topPotrait;
+
+    Portraittype(int total, String name) {
+        noOfPortrait = total;
+        topPotrait = name;
+    }
+
+    Portraittype() {
+        super();
+        this.noOfPortrait = 0;
+    }
+
+    void printInfo() {
+        super.printInfo();
+        System.out.println("\n### Portrait Details ###");
+        System.out.println("No of Portraits: " + noOfPortrait);
+        System.out.println("Top Portrait   : " + topPotrait);
+    }
 }
-final class portraittype{
-int noOfPortrait;
-string topPotrait;
-portraittype(int total,string name)
-{
-noOfPortrait=total;
-topPotrait=name;
-}
 
+class inheripoly {
+    public static void main(String[] args) throws IOException {
+        int ch;
+        Artist head = new Artist();
+        Mehandi mehandi = new Mehandi();
+        Rangoli rangoli = new Rangoli();
+        Portraittype prangoli = new Portraittype();
 
-class inheripoly{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+        do {
+            System.out.println(
+                "\n\nSelect the Operatiopn\n1.Insert Basic Artist Info\n2.Insert Rangoli Artist Info\n3.Insert Mehandi Artist Info\n4.Display Basis Info\n5.Display Rangoli Info\n6.Display Mehandi Info\n7.Insert Portrait ranoli info\n7.print portrait info\n8.end");
+            ch = Integer.parseInt(reader.readLine());
 
-public static void main(String[] args) throws IOException
-{ int ch;
- Artist head=new Artist();
- //Artist mehandi=new Mehandi();
- //Artist rangoli=new Rangoli();
- BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-System.out.print("Enter your name: ");
-String name = reader.readLine();
-System.out.println("Your name is: " + name);
-do{	Scanner ip=new Scanner(System.in);
-	System.out.println("Select the Operatiopn\n1.Insert Basic Artist Info\n2.Insert Rangoli Artist Info\n3.Insert Mehandi Artist Info\n4.Display Basis Info\n5.Display Rangoli Info\n6.Display Mehandi Info\n7.end");
-	ch=ip.nextInt();
-	switch(ch)
-	{
-	case 1:
-	    System.out.println("Enter the name of artist");
-	    head.name=reader.readLine();
-	    System.out.println("Enter the contact of artist");
-	    head.experience=reader.readInt();
-	    //ip.nextline();
-	    System.out.println("Enter the location of artist");
-	    head.location=reader.readLine();
-	    break;
-        case 2:
-            System.out.println("Enter the no of Rangoli pattern done");
-	    int no=ip.readInt();
-	    String[] pattern=new String[no];
-	    System.out.println("Enter the name of Rangoli pattern");
-	    for(int i=0;i<no;i++)
-	    {
-		pattern[i]=ip.next();
-	    }
-	    System.out.println("Enter the cost of Rangoli pattern");
-	    int cost=ip.readInt();
-	   // Artist rangoli=new Rangoli(cost,no,pattern);
-	   // rangoli.printInfo();
-	   Rangoli rang=new Rangoli(cost,no,pattern);
-	   rang.printInfo();
-            break;
-	    
-        case 3:
-            System.out.println("Enter the no of mehandi pattern done");
-	     no=ip.readInt();
-	     pattern=new String[no];
-	    System.out.println("Enter the name of mehandi pattern");
-	    for(int i=0;i<no;i++)
-	    {
-		pattern[i]=ip.next();
-	    }
-	    System.out.println("Enter the cost of mehandi pattern");
-	    cost=ip.readInt();
-	    Artist mehandi=new Mehandi(cost,no,pattern);
-            break;
-        case 4:
-            head.printmainInfo();
-            break;
-        case 5:
-            //rangoli.printInfo();
-            break;
-        case 6:
-           // mehandi.printInfo();
-            break;
-        default:
-            System.out.println("Enter the valid Choice:");
-            break;
+            switch (ch) {
+                case 1:
+                    System.out.print("Enter the name of artist: ");
+                    String name = reader.readLine();
+                    System.out.print("Enter the experience (years): ");
+                    int expe = Integer.parseInt(reader.readLine());
+                    System.out.print("Enter the location: ");
+                    String location = reader.readLine();
+                    System.out.print("Enter the age: ");
+                    int age = Integer.parseInt(reader.readLine());
+                    head = new Artist(name, age, expe, location);
+                    break;
+                case 2:
+                    System.out.print("Enter number of Rangoli patterns: ");
+                    int no = Integer.parseInt(reader.readLine());
+                    String[] pattern = new String[no];
+                    System.out.println("Enter names of Rangoli patterns:");
+                    for (int i = 0; i < no; i++) {
+                        pattern[i] = reader.readLine();
+                    }
+                    System.out.print("Enter cost of Rangoli patterns: ");
+                    int cost = Integer.parseInt(reader.readLine());
+                    rangoli = new Rangoli(cost, no, pattern);
+                    break;
+                case 3:
+                    System.out.print("Enter number of Mehandi patterns: ");
+                    no = Integer.parseInt(reader.readLine());
+                    pattern = new String[no];
+                    System.out.println("Enter names of Mehandi patterns:");
+                    for (int i = 0; i < no; i++) {
+                        pattern[i] = reader.readLine();
+                    }
+                    System.out.print("Enter cost of Mehandi patterns: ");
+                    cost = Integer.parseInt(reader.readLine());
+                    System.out.print("Enter experience in Mehandi (years): ");
+                    int exp = Integer.parseInt(reader.readLine());
+                    mehandi = new Mehandi(cost, no, pattern, exp);
+                    break;
+                case 4:
+                    head.printmainInfo();
+                    break;
+                case 5:
+                    rangoli.printInfo();
+                    break;
+                case 6:
+                    mehandi.printInfo();
+                    break;
+                case 7:
+                    System.out.print("Enter number of Portraits: ");
+                    int num = Integer.parseInt(reader.readLine());
+                    System.out.print("Enter top Portrait name: ");
+                    String top = reader.readLine();
+                    prangoli = new Portraittype(num, top);
+                    break;
+                case 8:
+                    prangoli.printInfo();
+                    break;
+                case 9:
+                    System.out.println("Exiting program. Thank you!");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please enter a valid option.");
             }
-            }
-           while(ch!=7);
-           }
-           }
-            
-        
-		
-   
-    
-   
-   // System.out.println("Enter the no of mehandi pattern done");
-    //int no=ip.nextInt();
-    //String[] pattern=new String[no];
-    //System.out.println("Enter the name of mehandi pattern");
-    //for(int i=0;i<no;i++)
-    //{
-      //  pattern[i]=ip.next();
-    //}
-    //System.out.println("Enter the cost of mehandi pattern");
-    //int cost=ip.nextInt();
-    //Mehandi mehandi=new Mehandi(cost,no,pattern);
-    //mehandi.printInfo();
-    //head.printmainInfo();
-    // Rangoli rangoli=new Rangoli();
-    // Mehandi mehandi=new Mehandi();
-
-    
-    
+        } while (ch != 9);
+    }
+}
