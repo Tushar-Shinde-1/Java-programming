@@ -1,0 +1,81 @@
+import   java.util.Scanner
+interface Address
+{
+	String village;
+	String taluka;
+	String district;
+	int pinCode;
+	void getAddress();
+}
+interface BankDetails
+{
+	int accNo;
+	String IFSCcode;
+	int bankBalance;
+	void getBankDetails();
+	void currentBankStatus();
+}
+interface Education
+{
+	float SSCmarks;
+	float HSCmarks;
+	String currentStream;
+	void getEducationInfo();
+	void studentLevel();
+}
+
+interface Student implements Address,BankDetails,Education
+{
+	void printInfo();
+}
+
+class StudentInfo implements Student
+{	Scanner ip =new Scanner(System.in);
+
+	getAddress()
+	{
+	System.out.print("Enter Village ");
+	village=ip.nextLine();
+	System.out.print("Enter Taluka ");
+	taluka=ip.nextLine();
+	System.out.print("Enter District ");
+	district=ip.nextLine();
+	System.out.print("Enter PinCode ");
+	pinCode=ip.nextInt();
+	}
+	getBankDetails()
+	{
+	System.out.print("Enter IFSC Code ");
+	IFSCcode=ip.nextLine();
+	System.out.print("Enter Acc no. ");
+	accNo=ip.nextInt();
+	System.out.print("Enter bank Balance ");
+	bankBalance=ip.nextInt();
+	}
+	currentBankStatus()
+	{
+	if(bankBalance<10000)
+	{
+		System.out.println("Low-Average Bank Balance ";
+	}
+	else if(bankBalance>10000&&bankBalance<100000)
+	{
+	 	System.out.println("Medium-High Bank Balance ";
+	}
+	else
+	{
+		System.out.print(" High Bank Balance ");
+	}
+	getEducationInfo()
+	{
+	System.out.print("Enter the SSC marks :");
+	SSCmarks=ip.nextInt();
+	System.out.print("Enter the HSC marks :");
+	HSCmarks=ip.nextInt();
+	System.out.print("Enter the current stream :");
+	currentStream
+	
+	
+}
+
+	
