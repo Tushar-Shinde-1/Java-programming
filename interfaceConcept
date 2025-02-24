@@ -1,102 +1,174 @@
 import java.util.Scanner;
-interface basicInfo{
+
+interface basicInfo {
     void enterInfo();
+
+    static void itsBasic() {
+        System.out.println("\nThe basic information ");
+    }
+
     void displayInfo();
 }
-interface education{
+
+interface education {
     void enterEducation();
+
     void displayEducation();
+
+    static void itsEducation() {
+        System.out.println("\nThe educational information ");
+    }
 }
-interface currentStatus{
+
+interface currentStatus {
+    void prediction();
+
     void enterStatus();
+
     void displayStatus();
+
+    static void itsStatus() {
+        System.out.println("\nThe current status ");
+    }
 }
-interface person extends basicInfo,education,currentStatus
-{
+
+interface person extends basicInfo, education, currentStatus {
     void printInfo();
 }
-class Details implements person
-{
-    Scanner ip=new Scanner(System.in);
-    //var for basic info
- String name,age,address;
- int mobNo;
- //var for education info
- float ssc,hsc;
- String  currentEduvation;
- //var for current status
- String currentStatus,workPlace ;
 
- public void enterInfo()
- {
-    System.out.print("enter the name");
-    name=ip.nextLine();
-    System.out.print("enter the age");  
-    age=ip.nextLine();
-    System.out.print("enter the address");
-    address=ip.nextLine();
-    System.out.print("enter the mob no");
-    mobNo=ip.nextInt();
-    ip.nextLine();
+class Details implements person {
+    Scanner ip = new Scanner(System.in);
+   
+    String name, age, address, area;
+    long mobNo;
 
- }
- public void displayInfo()
- {
-    System.out.println("NAME :"+name);
-    System.out.println( "AGE :"+age);
-    System.out.println("ADDRESS :"+address);
-    System.out.println("MOB :"+mobNo);
- }
- public void enterEducation()
- {
-    System.out.print("enter the ssc mark ");
-    ssc=ip.nextFloat();
-    ip.nextLine();
-    System.out.print("enter the hsc mark ");
-    hsc=ip.nextFloat();
-    ip.nextLine();
-    System.out.print("enter the current education");
-    currentEduvation=ip.nextLine();
-    }
-    public void displayEducation()
-    {
-        System.out.println("SSC mark :"+ssc);
-        System.out.println("hsc mark "+hsc);
-        System.out.println("current eductaion"+ currentEduvation);
-    }
-    public void enterStatus()
-    {
-        System.out.print("what you does currently");
-        currentStatus=ip.nextLine();
-        System.out.print("enter the work place");
-        workPlace=ip.nextLine();
-        
-    } 
-    public void displayStatus()
-    {
-        System.out.println("Current Status :"+currentStatus);
-        System.out.println("workplace :"+workPlace);
+    float ssc, hsc;
 
-    }
-    public void printInfo()
-    {
-     displayInfo();
-     displayEducation();
-     displayStatus();
+
+    String currentEduvation;
+    String workPlace;
+
+    public void enterInfo() {
+        System.out.print("enter the name :");
+        name = ip.nextLine();
+        System.out.print("enter the age :");
+        age = ip.nextLine();
+        System.out.print("enter the address :");
+        address = ip.nextLine();
+        System.out.print("enter the area :(R/U)");
+        area = ip.nextLine();
+        System.out.print("enter the mob no :");
+        mobNo = ip.nextInt();
+        ip.nextLine();
 
     }
 
+    public void displayInfo() {
+        System.out.println("\nNAME :" + name);
+        System.out.println("AGE :" + age);
+        System.out.println("ADDRESS :" + address);
+        System.out.println("MOB :" + mobNo);
+    }
+
+    public void enterEducation() {
+        System.out.print("enter the ssc mark(in percentage) :");
+        ssc = ip.nextFloat();
+        ip.nextLine();
+        System.out.print("enter the hsc mark(in percentage) :");
+        hsc = ip.nextFloat();
+        ip.nextLine();
+
+    }
+
+    public void displayEducation() {
+        System.out.println("\nSSC mark :" + ssc);
+        System.out.println("hsc mark " + hsc);
+
+    }
+
+    public void enterStatus() {
+        System.out.print("enter the current education :");
+        currentEduvation = ip.nextLine();
+        System.out.print("enter the work place:");
+        workPlace = ip.nextLine();
+
+    }
+
+    public void displayStatus() {
+        System.out.println("\nCurrent Status :" + currentEduvation);
+        System.out.println("workplace :" + workPlace);
+
+    }
+
+    public void printInfo() {
+        basicInfo.itsBasic(); 
+        displayInfo(); 
+        education.itsEducation(); 
+        displayEducation();
+        currentStatus.itsStatus();  
+        displayStatus();
+    }
+
+    public void prediction() {
+        System.out.println();
+        if (ssc <= 60 && hsc <= 60) {
+            System.out.println(name + " you need a continuous effoert and study hard");
+        } else if (ssc >= 61 && ssc <= 80 && hsc >= 61 && hsc <= 80) {
+            System.out.println(name + " you are doing good but you need to be more focused");
+        } else {
+            System.out.println(name + " you are doing good ,go ahead!!");
+        }
+        if (area == "U" || area == "u") {
+            System.out.println(name + ",try to use more online resources for quality education");
+        } else {
+            System.out.println(name + ", focus on good offline resources and if needed use online resources");
+        }
+    }
 }
-class studentinterface
-{
+
+class studentinterface{
     public static void main(String arg[])
-    {
+    {int choice;
+        
+Scanner ip=new Scanner(System.in);
         Details d=new Details();
+        System.out.print("\n\n WELCOME ,dear student fill your information step by step\n");
+        System.out.print("1. Enter your Basic details\n");
         d.enterInfo();
+        System.out.print("\n2. Enter your Education details\n");
         d.enterEducation();
+        System.out.print("\n3. Enter your Current Education Status\n");
         d.enterStatus();
-        d.printInfo();
+        do{
 
+            System.out.println("\n\n1. Print basic info\n2. Print education\n3. Print Education status\n4. print all info\n5. Suggestions\n6. exit");
+             choice=ip.nextInt();
+            ip.nextLine();
+            switch(choice)
+            {
+                case 1:
+                    d.displayInfo();
+                    break;
+                case 2:
+                    d.displayEducation();
+                    break;
+                case 3:
 
+                    d.displayStatus();
+                    break;
+                case 4:
+                    d.printInfo();
+                    break;
+                case 5:
+                    d.prediction();
+                    break;
+                default : 
+                System.out.println("invalid choice");
+            }
+        }
+            while(choice!=6);
+           
     }
+
+    
 }
