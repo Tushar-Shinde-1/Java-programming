@@ -1,0 +1,167 @@
+folder structure
+   mypakages  |
+              |->calci.java
+              |->advcalci |
+              |           |->adv.java
+              |->leapyear.java
+usepg.java
+
+
+
+//code 
+//calci.java:
+package mypakages;
+
+public class calci {
+    
+    public int add(int a,int b)
+
+    {
+        return a+b;
+    }
+    
+    public int sub(int a,int b)
+    {
+        return a-b;
+
+    }
+    public int mul(int a,int b)
+    {
+        return a*b;
+
+    }
+
+    public int div(int a,int b)
+    {
+        return a/b;
+    }
+
+    public int mod(int a,int b)
+    {
+        return a%b;
+    }
+    public int power(int a,int b)
+    {
+        return (int)Math.pow(a,b);
+    }
+    
+    public int square(int a)
+    {
+        return a*a;
+    }
+    public int cube(int a)
+    {
+        return a*a*a;
+    }
+    public int fact(int a)
+    {
+        int fact=1;
+        for(int i=1;i<=a;i++)
+        {
+            fact=fact*i;
+        }
+        return fact;
+    }
+
+    public int prime(int a)
+    {
+
+        for(int i=2;i<a;i++)
+        {
+            if(a%i==0)
+            {
+                return 0;
+            }
+        }return 1;
+    }
+
+    
+}
+
+
+//leapyear.java
+package mypakages;
+
+public class leapyear {
+    public String isleapyear(int year){
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)){
+            return "leap year";
+        }
+        return "not a leap year";
+    
+}
+}
+
+
+//adv.java
+package mypakages.advcalci;
+
+public class adv  {
+    mypakages.calci aa=new mypakages.calci();
+    
+    
+
+    public int meanarray(int arry[])
+    {
+        int sum=0;
+        for(int i=0;i<arry.length;i++)
+        {
+            sum=sum+arry[i];
+        }
+        return sum/arry.length;
+    }
+    public int sortarray(int a[])
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=i+1;j<a.length;j++)
+            {
+                if(a[i]>a[j])
+                {
+                    int temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+        return a[0];
+    }
+
+    public int addbetween(int a,int b)
+    {   int sum=0;
+        int check=b;
+     while(a<=check)
+     {
+      sum+=a;
+      a++;
+
+         
+     }
+     return sum;
+    }
+    
+public int avgsum(int a,int b)
+{
+    int c=aa.add(a,b);
+    return c/2;
+}
+    
+}
+
+//usepy.java
+
+import mypakages.calci;
+import mypakages.advcalci.adv;
+
+public class usepg {
+
+    public static void main(String[] args) {
+        calci obj = new calci();
+       System.out.println("addition is "+ obj.add(5,3));
+    adv a=new adv();
+    System.out.println("addition  between 4 to 9 is "+ a.addbetween(5,  9));
+    System.out.println("avg of sum of 3 and 9 is "+ a.avgsum(5,  9));
+
+    }
+}
+
