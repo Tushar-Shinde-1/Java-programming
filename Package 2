@@ -1,0 +1,304 @@
+root|
+    |mypakage1(class1.java)|
+    |         |advmypakage1(adv.java)
+    |mypackage2(class2.java)
+    |usemypakages.java
+
+
+//class1.java
+package mypakage1;
+
+public class class1 {
+    private String aa = "this is the basic calculator only";
+    protected String b = "basic mathematical operations";
+    public String c = "use calculator";
+
+    public int add(int a, int b)
+
+    {   System.out.println(aa);
+        return a + b;
+    }
+
+    public int sub(int a, int b) {
+        return a - b;
+
+    }
+
+    public int mul(int a, int b) {
+        return a * b;
+
+    }
+
+    public int div(int a, int b) {
+        return a / b;
+    }
+
+    public int mod(int a, int b) {
+        return a % b;
+    }
+
+    public int power(int a, int b) {
+        return (int) Math.pow(a, b);
+    }
+
+    public int square(int a) {
+        return a * a;
+    }
+
+    public int cube(int a) {
+        return a * a * a;
+    }
+
+    public int fact(int a) {
+        int fact = 1;
+        for (int i = 1; i <= a; i++) {
+            fact = fact * i;
+        }
+        return fact;
+    }
+
+    public int prime(int a) {
+
+        for (int i = 2; i < a; i++) {
+            if (a % i == 0) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+}
+
+//class2.java
+package mypackage2;
+import mypakage1.class1;
+
+public class class2 extends class1 {
+
+
+
+    
+    
+    public String isleapyear(int year){
+        System.out.println("we are using "+b);
+        if (prime(year) == 1) {
+            System.out.println("The year " + year + " is a prime number.");
+        } else {
+            System.out.println("The year " + year + " is NOT a prime number.");
+        }
+
+
+
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)){
+            return "leap year";
+        }
+        return "not a leap year";
+    
+}
+}
+
+//adv.java
+package mypakage1.advmypakage1;
+import mypakage1.class1;
+
+
+public class adv extends class1  {
+//mypakage1.advmypakage1 aa=new mypakages1.calci();
+    
+    
+
+    public int meanarray(int arry[])
+    {
+        int sum=0;
+        for(int i=0;i<arry.length;i++)
+        {
+            sum=sum+arry[i];
+        }
+        return sum/arry.length;
+    }
+    public int sortarray(int a[])
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=i+1;j<a.length;j++)
+            {
+                if(a[i]>a[j])
+                {
+                    int temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+        return a[0];
+    }
+
+    public int addbetween(int a,int b)
+    {   int sum=0;
+        int check=b;
+     while(a<=check)
+     {
+      sum+=a;
+      a++;
+
+         
+     }
+     return sum;
+    }
+    
+public int avgsum(int a,int b)
+{
+    int c=add(a,b);//calling inherited method from class 1
+    return c/2;
+}
+    
+}
+//usemypakages.java
+
+import mypakage1.class1;
+import mypackage2.class2;
+import java.util.Scanner;
+import mypakage1.advmypakage1.adv;
+
+public class usemypakages {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        class1 obj = new class1();
+        class2 obj2 = new class2();
+        adv obj3=new adv();
+
+        while (true) {
+            
+            System.out.println("\n\n"+obj.c);
+            System.out.println("\nSelect an operation:");
+            System.out.println("1. Addition");
+            System.out.println("2. Subtraction");
+            System.out.println("3. Multiplication");
+            System.out.println("4. Division");
+            System.out.println("5. Modulus");
+            System.out.println("6. Power");
+            System.out.println("7. Square");
+            System.out.println("8. Cube");
+            System.out.println("9. Factorial");
+            System.out.println("10. Prime Check");
+            System.out.println("11. Leap Year Check");
+            System.out.println("12. average of sum");
+            System.out.println("0. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+
+            if (choice == 0) {
+                System.out.println("Exiting program...");
+                break;
+            }
+
+            int num1 = 0, num2 = 0, result = 0;
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter two numbers: ");
+                    num1 = sc.nextInt();
+                    num2 = sc.nextInt();
+                    result = obj.add(num1, num2);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 2:
+                    System.out.print("Enter two numbers: ");
+                    num1 = sc.nextInt();
+                    num2 = sc.nextInt();
+                    result = obj.sub(num1, num2);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 3:
+                    System.out.print("Enter two numbers: ");
+                    num1 = sc.nextInt();
+                    num2 = sc.nextInt();
+                    result = obj.mul(num1, num2);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 4:
+                    System.out.print("Enter two numbers: ");
+                    num1 = sc.nextInt();
+                    num2 = sc.nextInt();
+                    if (num2 == 0) {
+                        System.out.println("Division by zero is not allowed!");
+                    } else {
+                        result = obj.div(num1, num2);
+                        System.out.println("Result: " + result);
+                    }
+                    break;
+
+                case 5:
+                    System.out.print("Enter two numbers: ");
+                    num1 = sc.nextInt();
+                    num2 = sc.nextInt();
+                    result = obj.mod(num1, num2);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 6:
+                    System.out.print("Enter base and exponent: ");
+                    num1 = sc.nextInt();
+                    num2 = sc.nextInt();
+                    result = obj.power(num1, num2);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 7:
+                    System.out.print("Enter a number: ");
+                    num1 = sc.nextInt();
+                    result = obj.square(num1);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 8:
+                    System.out.print("Enter a number: ");
+                    num1 = sc.nextInt();
+                    result = obj.cube(num1);
+                    System.out.println("Result: " + result);
+                    break;
+
+                case 9:
+                    System.out.print("Enter a number: ");
+                    num1 = sc.nextInt();
+                    result = obj.fact(num1);
+                    System.out.println("Factorial: " + result);
+                    break;
+
+                case 10:
+                    System.out.print("Enter a number: ");
+                    num1 = sc.nextInt();
+                    if (obj.prime(num1) == 1)
+                        System.out.println(num1 + " is a Prime Number");
+                    else
+                        System.out.println(num1 + " is NOT a Prime Number");
+                    break;
+
+                case 11://here we used the function of mypakage1 in mypakage2
+                    System.out.print("Enter a year: ");
+                    num1 = sc.nextInt();
+                    System.out.println("Leap Year Check: " + obj2.isleapyear(num1));
+                    break;
+                case 12://derived pakag
+                    System.out.print("Enter a number 1: ");
+                    num1 = sc.nextInt();
+                    System.out.print("Enter a number 2: ");
+                    num2 = sc.nextInt();
+                    System.out.println("the avg of numbers is "+obj3.avgsum(num1,num2));
+                    
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please enter a valid option.");
+            }
+        }
+
+        //sc.close();
+    }
+}
+
+
+
