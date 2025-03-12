@@ -1,0 +1,37 @@
+public class exceptionhandlinh extends Exception {
+    public exceptionhandlinh() {
+        System.out.println("Exception occured!!!!!!!");
+    }
+    public static void main(String args[])
+    {
+ int a=0;
+ String str=null;
+ int nums[]=new int[5];
+ try{
+int b;
+if(a==0)
+{
+    throw new exceptionhandlinh();
+   //throw new ArithmeticException();
+}
+//System.out.println("value of b is "+nums[5]);
+System.out.println("value of str is "+str.length());
+   
+ }
+catch (ArithmeticException e)
+{
+    System.out.println("\nArithmetic exception  ");
+
+}
+catch(ArrayIndexOutOfBoundsException e)
+{
+    System.out.println("\nArray size exceeded ");
+}
+catch(Exception e)
+{
+    System.out.println("\nException occured ");
+ }
+    }
+}
+    
+
