@@ -1,37 +1,117 @@
+import java.util.Scanner;
+
 public class exceptionhandlinh extends Exception {
-    public exceptionhandlinh() {
-        System.out.println("Exception occured!!!!!!!");
+    public exceptionhandlinh(String s) {
+        super(s);
     }
-    public static void main(String args[])
-    {
- int a=0;
- String str=null;
- int nums[]=new int[5];
- try{
-int b;
-if(a==0)
-{
-    throw new exceptionhandlinh();
-   //throw new ArithmeticException();
-}
-//System.out.println("value of b is "+nums[5]);
-System.out.println("value of str is "+str.length());
+
+    int checkyear(int birth) throws Exception {
+
+        int age = 2022 - birth;
+        int calc = birth / age;
+
+       
+return calc;
+    }
+
+    void checkbasic(int base) {
+        int basic = 2006 - base;
+        int check = 2006 / basic - base;
+        System.out.println("you are clear with basic criteria");
+    }
+
    
- }
-catch (ArithmeticException e)
-{
-    System.out.println("\nArithmetic exception  ");
 
-}
-catch(ArrayIndexOutOfBoundsException e)
-{
-    System.out.println("\nArray size exceeded ");
-}
-catch(Exception e)
-{
-    System.out.println("\nException occured ");
- }
+    public static void main(String args[]) {
+        Scanner ip=new Scanner(System.in);
+        int ch;
+        do{
+            System.out.println("1.Insert Student detail");
+            System.out.println("2.Insert Student Documentries");
+            System.out.println("3.Insert the mark");
+            ch=ip.nextInt();
+            switch(ch){
+                case 1:
+                    System.out.println("Insert Student detail");
+                    System.out.println("Enter student name");   
+                    String name=ip.next();
+                    try{
+                    System.out.println("Enter student age");
+                    int age=ip.nextInt();
+                    if(age<0)
+                    {
+                        throw new Exception("Age can not be negative");
+                    }
+                    System.out.println("Enter student current marks");
+                    int marks=ip.nextInt();
+                    if(marks<0)
+                    {
+                        throw new Exception("Marks can not be negative");
+                    }
+                    System.out.println("enter id with min 4 integer");
+                    System.out.println("enter the size of your id");
+                    int size=ip.nextInt();
+                    int id[]=new int[4];
+                    for(int i=0;i<size;i++)
+                    {
+                        id[i]=ip.nextInt();
+                    }
+                }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("id size is not equal to 4");
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        
+                    }
+
+                    finally {
+                        System.out.println("\nmake sure that everything is valid credantials\n");
+                    }
+
+                    break;
+                case 2:
+                    System.out.println("Enter student birth year");
+                    int birthyear=ip.nextInt();
+                    try{
+                        exceptionhandlinh obj = new exceptionhandlinh("it's validation check :");
+                    obj.checkyear(birthyear);
+                    obj.checkbasic(birthyear);
+                     System.out.println("your age code is"+obj.checkyear(birthyear));
+                    }
+                   
+                    catch(Exception e)
+                    {
+                        System.out.println("you are defaulter!!");
+                    }
+                    
+                    finally {
+                        System.out.println("make sure that everything is valid credantials");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Enter student ssc marks");
+                    int sscmarks=ip.nextInt();
+                    System.out.println("Enter student hsc marks");
+                    int hscmarks=ip.nextInt();
+
+                    try{
+                        if(hscmarks<60||sscmarks<60)
+                        {
+                            throw new exceptionhandlinh("you are not eligible for admission");
+                        }
+                     }
+                     catch (exceptionhandlinh e) {  
+                        System.out.println(e.getMessage());
+                     }
+                     
+                    finally {
+                        System.out.println("make sure that everything is valid credantials");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+                    }
+    }while(ch!=4);
     }
 }
-    
-
