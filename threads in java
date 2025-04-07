@@ -1,0 +1,54 @@
+class myTask implements Runnable{
+    public void run(){
+        System.out.println("Hello");
+    }
+
+}
+class myTask2 extends Thread{
+    public void run(){
+        System.out.println("Hello1");
+    }
+}
+
+class shareobject {
+    public synchronized void print(String s)
+    {
+        for(int i=0;i<4;i++)
+        {
+            System.out.println(s+":"+i);
+        }
+    }
+}
+  
+
+class checkshare implements Runnable{
+shareobject s;
+checkshare(shareobject s)
+{
+    this.s=s;
+}
+public void run()
+{
+    s.print(Thread.currentThread().getName());
+}
+}
+public class threads {
+    public static void main(String[] args) {
+        Thread t1=new Thread(new myTask());
+        t1.start();
+        myTask2 t2=new myTask2();
+        t2.start();
+
+
+
+shareobject obj =new shareobject();
+Thread t3=new Thread(new checkshare(obj));
+Thread t4=new Thread(new checkshare(obj));
+t4.setPriority(Thread.MAX_PRIORITY);
+t3.start();
+t4.start();
+
+
+
+    }
+}
