@@ -1,54 +1,95 @@
-class myTask implements Runnable{
-    public void run(){
-        System.out.println("Hello");
-    }
+class StudentStatus {
+    int marks[] = {200, 180, 222, 234, 100, 150};
 
-}
-class myTask2 extends Thread{
-    public void run(){
-        System.out.println("Hello1");
-    }
-}
+    synchronized void calculateResult(int rollNo) {
+        if (rollNo >= 0 && rollNo < marks.length) {
+            int mark = marks[rollNo];
+            double percent = (mark / 300.0) * 100;
+            String result = percent >= 40 ? "Pass" : "Fail";
 
-class shareobject {
-    public synchronized void print(String s)
-    {
-        for(int i=0;i<4;i++)
-        {
-            System.out.println(s+":"+i);
+            System.out.println("Thread: " + Thread.currentThread().getName());
+            System.out.println("Priority: " + Thread.currentThread().getPriority());
+            System.out.println("Roll No: " + rollNo);
+            System.out.println("Marks: " + mark);
+            System.out.printf("Percentage: %.2f%%\n", percent);
+            System.out.println("Result: " + result);
+            System.out.println("----------------------------");
+        }
+
+        try {
+            Thread.sleep(2000); // 2-s delay
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
-  
 
-class checkshare implements Runnable{
-shareobject s;
-checkshare(shareobject s)
-{
-    this.s=s;
+// Thread class
+class StudentThread extends Thread {
+    StudentStatus status;
+    int rollNo;
+
+    StudentThread(StudentStatus status, int rollNo, String name) {
+        super(name);
+        this.status = status;
+        this.rollNo = rollNo;
+    }
+
+    public void run() {
+        status.calculateResult(rollNo);
+    }
 }
-public void run()
-{
-    s.print(Thread.currentThread().getName());
+
+//  Runnableinterface
+class PercentStudent implements Runnable {
+    StudentStatus status;
+    int rollNo;
+
+    PercentStudent(StudentStatus status, int rollNo) {
+        this.status = status;
+        this.rollNo = rollNo;
+    }
+
+    public void run() {
+        status.calculateResult(rollNo);
+    }
 }
-}
-public class threads {
+
+public class marksthread {
     public static void main(String[] args) {
-        Thread t1=new Thread(new myTask());
+        StudentStatus status = new StudentStatus();
+
+        // Thread-based students
+        StudentThread t1 = new StudentThread(status, 0, "StudentThread-1");
+        StudentThread t2 = new StudentThread(status, 1, "StudentThread-2");
+
+        // Runnable-based students
+        PercentStudent ps1 = new PercentStudent(status, 2);
+        PercentStudent ps2 = new PercentStudent(status, 3);
+        Thread r1 = new Thread(ps1, "Runnable-1");
+        Thread r2 = new Thread(ps2, "Runnable-2");
+
+        // Set priorities
+        t1.setPriority(Thread.MAX_PRIORITY);     
+        t2.setPriority(3);                       
+        r1.setPriority(8);
+        r2.setPriority(6);
+
+    
         t1.start();
-        myTask2 t2=new myTask2();
+        r1.start();
+        r2.start();
         t2.start();
 
+        try {
+            t1.join();
+            t2.join();
+            r1.join();
+            r2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-
-shareobject obj =new shareobject();
-Thread t3=new Thread(new checkshare(obj));
-Thread t4=new Thread(new checkshare(obj));
-t4.setPriority(Thread.MAX_PRIORITY);
-t3.start();
-t4.start();
-
-
-
+        System.out.println("All student results processed based on thread priority.");
     }
 }
